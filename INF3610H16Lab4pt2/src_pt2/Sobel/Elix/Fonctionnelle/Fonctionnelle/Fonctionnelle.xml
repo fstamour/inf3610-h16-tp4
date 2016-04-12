@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+********************************************************************************
+
+	Author : SpaceStudio generation engine
+
+	Warning: This file content will be overwritten by the configuration manager.
+
+********************************************************************************
+ -->
+<project
+	name="Sobel"
+	level="Elix"
+	ConfigName="Fonctionnelle"
+	SpaceStudioVersion="280">
+
+	<InstanceList>
+		<component
+			type="Bus"
+			SubType="UTFChannel"
+			InstanceName="UTFChannel1"
+			id_key="UTFCHANNEL1_ID"
+			id="2"
+			uiChannelWidth="ChannelWidthInfinite"
+			verbose="false"
+			ptrAddress="0"
+			ulBaseAddress="0x0"
+			ulHighAddress="0xFFFFFFFF"
+			isFixRange="true"
+			ulMaxComponentSize="0x100000000"
+			ulMinComponentSize="0x100">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="BitmapRW"
+			InstanceName="BitmapRW1"
+			HeaderFileName="Undefined"
+			id_key="BITMAPRW_ID"
+			id="0"
+			prio_key="BITMAPRW_PRIO"
+			prio="1"
+			verbose="false"
+			SystemClock="SysClock">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="Sobel"
+			InstanceName="Sobel1"
+			HeaderFileName="Undefined"
+			id_key="SOBEL_ID"
+			id="3"
+			prio_key="SOBEL_PRIO"
+			prio="3"
+			verbose="false"
+			SystemClock="SysClock">
+		</component>
+
+		<component
+			type="ResetManager"
+			SubType="ResetManager"
+			InstanceName="reset_manager"
+			verbose="true"
+			reset_after="0"
+			reset_hold="1"
+			running_period="10"
+			running_unit="SC_MS">
+		</component>
+
+		<signal
+			type="Signal"
+			SubType="sc_clock"
+			InstanceName="SysClock"
+			DutyCycle="0.5"
+			Period="10"
+			PeriodTimeUnit="SC_NS">
+		</signal>
+
+
+	</InstanceList>
+	
+	<Binding>
+
+		<ComponentLevel>
+
+			<component
+				type="Bus"
+				SubType="UTFChannel"
+				InstanceName="UTFChannel1">
+
+				
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="BitmapRW"
+					InstanceName="BitmapRW1">
+
+				</component>
+
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="Sobel"
+					InstanceName="Sobel1">
+
+				</component>
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="BitmapRW"
+				InstanceName="BitmapRW1">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="Sobel"
+				InstanceName="Sobel1">
+
+
+			</component>
+
+			<component
+				type="ResetManager"
+				SubType="ResetManager"
+				InstanceName="reset_manager">
+
+
+			</component>
+
+
+		</ComponentLevel>
+
+	</Binding>
+
+</project>
