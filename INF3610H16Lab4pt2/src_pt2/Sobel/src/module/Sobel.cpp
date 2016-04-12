@@ -68,18 +68,12 @@ void Sobel::thread(void) {
 	uint8_t Y[IMG_SIZE];
 	uint8_t Sob[IMG_SIZE];
 
-	message_t message;
+	//while(1) {
+		//MyPrint("[Sobel] executing...\n");
 
-	while(1) {
-		MyPrint("[Sobel] executing...\n");
+		ModuleRead(RGBTOBW_ID, SPACE_BLOCKING, Y, IMG_SIZE);
 
-		for(int i = 0; i < IMG_SIZE; ++i) {
-			ModuleRead(RGBTOBW_ID, SPACE_BLOCKING, &message);
-			// TODO Check the message type.
-			Y[i] = (uint8_t)message.param0;
-		}
-
-		MyPrint("[Sobel] Applying the filter...\n");
+		//MyPrint("[Sobel] Applying the filter...\n");
 		for(int x = 1; x < IMG_WIDTH - 1; ++x) {
 			for(int y = 1; y < IMG_HEIGHT -1; ++y) {
 				int index = y * IMG_WIDTH + x;
@@ -88,14 +82,9 @@ void Sobel::thread(void) {
 			}
 		}
 
-		MyPrint("[Sobel] Sending bitmap...\n");
-		memset(&message, 0, sizeof(message));
-		message.command_type = MSG_BMP_WRITE;
-		for(int i = 0; i < IMG_SIZE; ++i) {
-			message.param0 = (cmd_param_t)Sob[i];
-			ModuleWrite(BITMAPRW_ID, SPACE_BLOCKING, &message);
-		}
+		//MyPrint("[Sobel] Sending bitmap...\n");
+		ModuleWrite(BITMAPRW_ID, SPACE_BLOCKING, Sob, IMG_SIZE);
 
 		computeFor(1);
-	}
+	//}
 }

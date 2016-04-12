@@ -8,10 +8,11 @@
 #ifndef SOBEL_H
 #define SOBEL_H
 
-#include "SpaceBaseModule.h"
 #include <inttypes.h>
+
+#include "SpaceBaseModule.h"
 #include "systemc"
-#include "ApplicationDefinitions.h"
+
 
 class Sobel: public SpaceBaseModule {
 	public:

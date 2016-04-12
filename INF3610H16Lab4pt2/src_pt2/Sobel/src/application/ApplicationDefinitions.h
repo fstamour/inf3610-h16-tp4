@@ -22,13 +22,14 @@
 #ifndef APPLICATION_DEFINITIONS_H
 #define APPLICATION_DEFINITIONS_H
 
-//Add your definitions here
+#include "PlatformDefinitions.h"
 
+/*#define IMG_WIDTH 1920
+#define IMG_HEIGHT 1080*/
 
-#define IMG_WIDTH 1920
-#define IMG_HEIGHT 1080
+#define IMG_WIDTH 100
+#define IMG_HEIGHT IMG_WIDTH
 #define IMG_SIZE (IMG_WIDTH * IMG_HEIGHT)
-
 
 
 #if defined(SIMTEK) && defined(SPACE_SIMULATION_MONITORING)
@@ -39,29 +40,8 @@
 	#define SpacePrintIfNotMonitoring(fmt, ...) SpacePrint(fmt, ##__VA_ARGS__ )
 #endif
 
+
 #define MyPrint(fmt, ...) do { SpacePrintIfNotMonitoring(fmt, ##__VA_ARGS__); waitIfNotMonitoring(1); } while(0)
-
-
-/**********************/
-/****** Commands ******/
-/**********************/
-
-typedef unsigned long cmd_type_t;
-typedef unsigned long cmd_param_t;
-
-typedef struct {
-	cmd_type_t  command_type;
-	cmd_param_t param0;
-	cmd_param_t param1;
-	cmd_param_t param2;
-} message_t;
-
-// Ex: const cmd_type_t NOM_DU_TYPE_DE_COMMANDE = <un entier>
-
-const cmd_type_t MSG_RGB_TO_BW = 54;
-const cmd_type_t MSG_SOBEL = 45;
-const cmd_type_t MSG_BMP_WRITE = 454;
-
 
 
 #endif //APPLICATION_DEFINITIONS_H

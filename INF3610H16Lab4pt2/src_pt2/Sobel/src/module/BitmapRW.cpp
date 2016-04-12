@@ -34,24 +34,28 @@ void BitmapRW::thread(void) {
 	#define PATH_TO_RESULT "../../../../../../results/img/"
 #endif
 
+	MyPrint("\n[BitmapRW] Executing.\n");
+
 	const char * outName = PATH_TO_RESULT "result.bmp";
 
-	const char * inputImage = PATH_TO_FILES "test_1080p.bmp";
+	//const char * inputImage = PATH_TO_FILES "test_1080p.bmp";
 	//const char * inputImage = PATH_TO_FILES "test_500x500.bmp";
-	//const char * inputImage = PATH_TO_FILES "test_100x100.bmp";
+	const char * inputImage = PATH_TO_FILES "test_100x100.bmp";
 	//const char * inputImage = PATH_TO_FILES "test_36x36.bmp";
-	const char * goldenModel = PATH_TO_FILES "result_1080p_golden.bmp";
+	//const char * goldenModel = PATH_TO_FILES "result_1080p_golden.bmp";
 	//const char * goldenModel = PATH_TO_FILES "result_500x500_golden.bmp";
-	//const char * goldenModel = PATH_TO_FILES "result_100x100_golden.bmp";
+	const char * goldenModel = PATH_TO_FILES "result_100x100_golden.bmp";
 	//const char * goldenModel = PATH_TO_FILES "result_36x36_golden.bmp";
 
 
+	MyPrint("[BitmapRW] About to malloc things.\n");
 	uint8_t *R = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
 	uint8_t *G = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
 	uint8_t *B = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
 	uint8_t *Y = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
 
 	// Fill a frame with data
+	MyPrint("[BitmapRW] About to load the image.\n");
 	int read_tmp = BMP_Read(inputImage, IMG_HEIGHT, IMG_WIDTH, R, G, B);
 	if(read_tmp != 0) {
 		SpacePrintIfNotMonitoring("Loading image failed\n");
@@ -59,40 +63,27 @@ void BitmapRW::thread(void) {
 	}
 
 	/*À COMPLÉTER: Communications avec les autres modules */
-	message_t message = {0};
 
 	// On envoie les array R, G et B au module RGBtoBW.
-	MyPrint("\nAbout to send RGB to RGBtoBW.\n");
-	for(int i = 0; i < IMG_SIZE; ++i) {
-		message.command_type = MSG_RGB_TO_BW;
-		message.param0 = (cmd_param_t)R[i];
-		message.param1 = (cmd_param_t)G[i];
-		message.param2 = (cmd_param_t)B[i];
-		ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, &message);
-	}
+	MyPrint("[BitmapRW] Sending...\n");
+	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, R, IMG_SIZE);
+	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, G, IMG_SIZE);
+	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, B, IMG_SIZE);
 
-	for(int i = 0; i < IMG_SIZE; ++i) {
-		ModuleRead(SOBEL_ID, SPACE_BLOCKING, &message);
-		// TODO Check the message type.
-		Y[i] = (uint8_t)message.param0;
-	}
-	if(message.command_type != MSG_BMP_WRITE) {
-		SpacePrintIfNotMonitoring("[BitmapRW] Invalid message type: %d\n", message.command_type);
-		sc_stop();
-	}
-	// MyPrint("[BitmapRW] About to copy the Y (received from Sobel).\n");
-	uint8_t *Sob = (uint8_t *)message.param0;
-	memcpy(Y, Sob, IMG_SIZE);
+	MyPrint("[BitmapRW] Receiving...\n");
+	ModuleRead(SOBEL_ID, SPACE_BLOCKING, Y, IMG_SIZE);
 
 
 #if !defined(SIMTEK) || !defined(SPACE_SIMULATION_MONITORING)
 	//Write the image back to disk
+	MyPrint("[BitmapRW] About to write the resulting bitmap.\n");
 	int write_tmp = BMP_Write(outName, IMG_HEIGHT, IMG_WIDTH, Y, Y, Y);
 	if(write_tmp != 0){
 		SpacePrintIfNotMonitoring("WriteBMP %s failed\n", outName);
 		sc_stop();
 	}
 
+	MyPrint("[BitmapRW] Diff'ing...\n");
 	char diffStr[1000];
 	snprintf(diffStr, sizeof(diffStr), "diff %s %s", outName, goldenModel);
 	int check_results = system(diffStr);
@@ -104,6 +95,7 @@ void BitmapRW::thread(void) {
 	}
 #endif
 
+	MyPrint("[BitmapRW] Done, about to free stuff.\n");
 	free(R);
 	free(G);
 	free(B);
