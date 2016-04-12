@@ -58,4 +58,10 @@ void RGBtoBW::thread(void) {
 
 		ModuleWrite(SOBEL_ID, SPACE_BLOCKING, Y, IMG_SIZE);
 	}
+
+
+	free(R);
+	free(G);
+	free(B);
+	free(Y);
 }
