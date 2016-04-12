@@ -246,8 +246,8 @@
 			id_key="XILINXPIC1_ID"
 			id="12"
 			ulMinAddressRange="0x100"
-			ulBaseAddress="0x41001000"
-			ulHighAddress="0x41001FFF"
+			ulBaseAddress="0x41003000"
+			ulHighAddress="0x41003FFF"
 			isFixRange="false"
 			verbose="false">
 
@@ -279,6 +279,20 @@
 			Period="10"
 			PeriodTimeUnit="SC_NS">
 		</signal>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="RGBtoBW"
+			InstanceName="RGBtoBW1"
+			HeaderFileName="Undefined"
+			id_key="RGBTOBW_ID"
+			id="1"
+			prio_key="RGBTOBW_PRIO"
+			prio="4"
+			verbose="false"
+			SystemClock="SysClock">
+		</component>
 
 
 	</InstanceList>
@@ -398,6 +412,14 @@
 
 					</component>
 
+					<component
+						type="Module"
+						SubType="STANDARD"
+						ClassName="RGBtoBW"
+						InstanceName="RGBtoBW1">
+
+					</component>
+
 				</component>
 
 
@@ -498,6 +520,14 @@
 
 					</component>
 
+					<component
+						type="Module"
+						SubType="STANDARD"
+						ClassName="RGBtoBW"
+						InstanceName="RGBtoBW1">
+
+					</component>
+
 				</component>
 
 
@@ -569,6 +599,14 @@
 					type="PIC"
 					SubType="XilinxPIC"
 					InstanceName="XilinxPIC1">
+
+				</component>
+
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="RGBtoBW"
+					InstanceName="RGBtoBW1">
 
 				</component>
 
@@ -684,6 +722,15 @@
 				type="ResetManager"
 				SubType="ResetManager"
 				InstanceName="reset_manager">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="RGBtoBW"
+				InstanceName="RGBtoBW1">
 
 
 			</component>
