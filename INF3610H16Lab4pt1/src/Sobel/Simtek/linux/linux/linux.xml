@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+********************************************************************************
+
+	Author : SpaceStudio generation engine
+
+	Warning: This file content will be overwritten by the configuration manager.
+
+********************************************************************************
+ -->
+<project
+	name="Sobel"
+	level="Simtek"
+	ConfigName="linux"
+	SpaceStudioVersion="280">
+
+	<InstanceList>
+		<component
+			type="Adapter"
+			SubType="ISSAdapter"
+			InstanceName="ISSAdapter1"
+			id="11"
+			id_key="ISSADAPTER1_ID"
+			verbose="false"
+			isFixRange="false"
+			ulMinAddressRange="0x1000000"
+			ulBaseAddress="0x0"
+			ulHighAddress="0x0">
+
+			<RequisiteFor
+				id="arm.core0.issadapter"
+				type="Core"
+				SubType="armCortexA9_DisTLM.core0"
+				InstanceName="armCortexA91.core0">
+			</RequisiteFor>
+
+		</component>
+
+		<component
+			type="Adapter"
+			SubType="InterfaceRange"
+			InstanceName="armCortexA91_DDR_InterfaceRange1"
+			id="7"
+			id_key="ARMCORTEXA91_DDR_INTERFACERANGE1_ID"
+			verbose="false"
+			ulMinAddressRange="0x100"
+			ulBaseAddress="0x00000000"
+			ulHighAddress="0x3FFFFFFF"
+			isFixRange="true">
+
+			<RequisiteFor
+				id="arm.ddr"
+				type="ISS"
+				SubType="armCortexA9"
+				InstanceName="armCortexA91">
+			</RequisiteFor>
+
+		</component>
+
+		<component
+			type="Bridge"
+			SubType="FunctionalBridge"
+			InstanceName="FunctionalBridge1"
+			id_key="FUNCTIONALBRIDGE1_ID"
+			id="9"
+			prio_key="FUNCTIONALBRIDGE1_PRIO"
+			prio="1"
+			verbose="false"
+			bridgeMasterBus="Bus,AMBA_AXIBus_LT,,armCortexA91_HP0_AMBA_AXIBus_LT1
+"
+			bridgeSlaveBus="Bus,AMBA_AXIBus_LT,,AMBA_AXIBus_LT1
+"
+			bridgeWindows="Undefined">
+		</component>
+
+		<component
+			type="Bridge"
+			SubType="FunctionalBridge"
+			InstanceName="FunctionalBridge2"
+			id_key="FUNCTIONALBRIDGE2_ID"
+			id="10"
+			prio_key="FUNCTIONALBRIDGE2_PRIO"
+			prio="2"
+			verbose="false"
+			bridgeMasterBus="Bus,AMBA_AXIBus_LT,,AMBA_AXIBus_LT1
+"
+			bridgeSlaveBus="Bus,AMBA_AXIBus_LT,,armCortexA91_HP0_AMBA_AXIBus_LT1
+"
+			bridgeWindows="Undefined">
+		</component>
+
+		<component
+			type="Bus"
+			SubType="AMBA_AXIBus_LT"
+			InstanceName="AMBA_AXIBus_LT1"
+			id_key="AMBA_AXIBUS_LT1_ID"
+			id="2"
+			uiChannelWidth="ChannelWidth4"
+			verbose="false"
+			ptrAddress="0"
+			ulBaseAddress="0x0"
+			ulHighAddress="0xFFFFFFFF"
+			isFixRange="true"
+			ulMaxComponentSize="0x100000000"
+			ulMinComponentSize="0x1000"
+			SystemClock="SysClock"
+			SoftwareCodeBigEndian="false"
+			axiPolicy="AXI_INTERCONNECT_SHARED_ALL"
+			ArbitrationLatency="1"
+			TransferLatency="1"
+			AcknowledgmentLatency="1">
+		</component>
+
+		<component
+			type="Bus"
+			SubType="AMBA_AXIBus_LT"
+			InstanceName="armCortexA91_HP0_AMBA_AXIBus_LT1"
+			id_key="ARMCORTEXA91_HP0_AMBA_AXIBUS_LT1_ID"
+			id="8"
+			uiChannelWidth="ChannelWidth4"
+			verbose="false"
+			ptrAddress="0"
+			ulBaseAddress="0x0"
+			ulHighAddress="0xFFFFFFFF"
+			isFixRange="true"
+			ulMaxComponentSize="0x100000000"
+			ulMinComponentSize="0x1000"
+			SystemClock="SysClock"
+			SoftwareCodeBigEndian="false"
+			axiPolicy="AXI_INTERCONNECT_SHARED_ALL"
+			ArbitrationLatency="1"
+			TransferLatency="1"
+			AcknowledgmentLatency="1">
+
+			<RequisiteFor
+				id="arm.hp0"
+				type="ISS"
+				SubType="armCortexA9"
+				InstanceName="armCortexA91">
+			</RequisiteFor>
+
+		</component>
+
+		<component
+			type="ISS"
+			SubType="armCortexA9"
+			InstanceName="armCortexA91"
+			id="4"
+			id_key="ARMCORTEXA91_ID"
+			ptrAddress=""
+			prio="1"
+			prio_key="ARMCORTEXA91_PRIO"
+			verbose="false"
+			main_memory_both_miss_penalty="20"
+			l1_inst_cache="true"
+			l1_inst_cache_size="0x8000"
+			l1_inst_words_per_cacheline="8"
+			l1_inst_associativity="4-way"
+			l1_inst_replacement_policy="LRU"
+			l1_inst_write_policy="Write-back"
+			l1_inst_write_miss_behaviour="Write_allocate"
+			l1_inst_miss_penalty="3"
+			l1_data_cache="true"
+			l1_data_cache_size="0x8000"
+			l1_data_words_per_cacheline="8"
+			l1_data_associativity="4-way"
+			l1_data_replacement_policy="LRU"
+			l1_data_write_policy="Write-back"
+			l1_data_write_miss_behaviour="Write_allocate"
+			l1_data_miss_penalty="3"
+			l2_both_cache="true"
+			l2_both_cache_size="0x80000"
+			l2_both_words_per_cacheline="8"
+			l2_both_associativity="8-way"
+			l2_both_replacement_policy="LRU"
+			l2_both_write_policy="Write-back"
+			l2_both_write_miss_behaviour="Write_allocate"
+			l2_both_miss_penalty="20"
+			SoftwareCodeBigEndian="false"
+			clockFrequency="800000000"
+			tickFrequency="100"
+			MPtype="SMP"
+			hostname="localhost"
+			port="1024"
+			avg_cycle_inst="1.0"
+			isServer="false">
+
+			<model
+				name="armCortexA9_DisTLM">
+			</model>
+			
+		</component>
+
+		<component
+			type="Core"
+			SubType="armCortexA9_DisTLM.core0"
+			id_key="ARMCORTEXA91_CORE0_ID"
+			id="5"
+			zBinaryFileName="../armCortexA91/Sobel_armCortexA91.arm.elf"
+			rtos="Linux"
+			InstanceName="armCortexA91.core0">
+		</component>
+
+		<component
+			type="Core"
+			SubType="armCortexA9_DisTLM.core1"
+			id_key="ARMCORTEXA91_CORE1_ID"
+			id="6"
+			zBinaryFileName="0"
+			rtos="Linux"
+			InstanceName="armCortexA91.core1">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="BitmapRW"
+			InstanceName="BitmapRW1"
+			HeaderFileName="Undefined"
+			id_key="BITMAPRW_ID"
+			id="0"
+			prio_key="BITMAPRW_PRIO"
+			prio="3"
+			verbose="false"
+			SystemClock="SysClock">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="Sobel"
+			InstanceName="Sobel1"
+			HeaderFileName="Undefined"
+			id_key="SOBEL_ID"
+			id="3"
+			prio_key="SOBEL_PRIO"
+			prio="5"
+			verbose="false"
+			SystemClock="SysClock">
+		</component>
+
+		<component
+			type="PIC"
+			SubType="XilinxPIC"
+			InstanceName="XilinxPIC1"
+			id_key="XILINXPIC1_ID"
+			id="12"
+			ulMinAddressRange="0x100"
+			ulBaseAddress="0x0"
+			ulHighAddress="0x0"
+			isFixRange="false"
+			verbose="false">
+
+			<RequisiteFor
+				id="arm.core0.pic"
+				type="Core"
+				SubType="armCortexA9_DisTLM.core0"
+				InstanceName="armCortexA91.core0">
+			</RequisiteFor>
+
+		</component>
+
+		<component
+			type="ResetManager"
+			SubType="ResetManager"
+			InstanceName="reset_manager"
+			verbose="true"
+			reset_after="0"
+			reset_hold="1"
+			running_period="10"
+			running_unit="SC_MS">
+		</component>
+
+		<signal
+			type="Signal"
+			SubType="sc_clock"
+			InstanceName="SysClock"
+			DutyCycle="0.5"
+			Period="10"
+			PeriodTimeUnit="SC_NS">
+		</signal>
+
+
+	</InstanceList>
+	
+	<Binding>
+
+		<ComponentLevel>
+
+			<component
+				type="Adapter"
+				SubType="ISSAdapter"
+				InstanceName="ISSAdapter1">
+
+
+			</component>
+
+			<component
+				type="Adapter"
+				SubType="InterfaceRange"
+				InstanceName="armCortexA91_DDR_InterfaceRange1">
+
+
+			</component>
+
+			<component
+				type="Bridge"
+				SubType="FunctionalBridge"
+				InstanceName="FunctionalBridge1">
+
+				
+				<component
+					type="Bus"
+					SubType="AMBA_AXIBus_LT"
+					InstanceName="armCortexA91_HP0_AMBA_AXIBus_LT1">
+
+					<component
+						type="Adapter"
+						SubType="InterfaceRange"
+						InstanceName="armCortexA91_DDR_InterfaceRange1">
+
+						<port
+							name="SlaveIFPort"
+							value="armCortexA91"
+							target="HP0">
+
+						</port>
+
+					</component>
+
+				</component>
+
+				<component
+					type="Bus"
+					SubType="AMBA_AXIBus_LT"
+					InstanceName="AMBA_AXIBus_LT1">
+
+					<component
+						type="Module"
+						SubType="STANDARD"
+						ClassName="Sobel"
+						InstanceName="Sobel1">
+
+					</component>
+
+					<component
+						type="ISS"
+						SubType="armCortexA9"
+						InstanceName="armCortexA91">
+
+						<port
+							name="DBusPort"
+							value="AMBA_AXIBus_LT1">
+
+						</port>
+
+						<port
+							name="IBusPort"
+							value="AMBA_AXIBus_LT1">
+
+						</port>
+
+						<component
+							type="Core"
+							SubType="armCortexA9_DisTLM.core0"
+							InstanceName="armCortexA91.core0">
+
+							<component
+								type="Module"
+								SubType="STANDARD"
+								ClassName="BitmapRW"
+								InstanceName="BitmapRW1">
+
+							</component>
+
+						</component>
+
+						<component
+							type="Core"
+							SubType="armCortexA9_DisTLM.core1"
+							InstanceName="armCortexA91.core1">
+
+						</component>
+
+					</component>
+
+					<component
+						type="Adapter"
+						SubType="ISSAdapter"
+						InstanceName="ISSAdapter1">
+
+					</component>
+
+					<component
+						type="PIC"
+						SubType="XilinxPIC"
+						InstanceName="XilinxPIC1">
+
+					</component>
+
+				</component>
+
+
+			</component>
+
+			<component
+				type="Bridge"
+				SubType="FunctionalBridge"
+				InstanceName="FunctionalBridge2">
+
+				
+				<component
+					type="Bus"
+					SubType="AMBA_AXIBus_LT"
+					InstanceName="armCortexA91_HP0_AMBA_AXIBus_LT1">
+
+					<component
+						type="Adapter"
+						SubType="InterfaceRange"
+						InstanceName="armCortexA91_DDR_InterfaceRange1">
+
+						<port
+							name="SlaveIFPort"
+							value="armCortexA91"
+							target="HP0">
+
+						</port>
+
+					</component>
+
+				</component>
+
+				<component
+					type="Bus"
+					SubType="AMBA_AXIBus_LT"
+					InstanceName="AMBA_AXIBus_LT1">
+
+					<component
+						type="Module"
+						SubType="STANDARD"
+						ClassName="Sobel"
+						InstanceName="Sobel1">
+
+					</component>
+
+					<component
+						type="ISS"
+						SubType="armCortexA9"
+						InstanceName="armCortexA91">
+
+						<port
+							name="DBusPort"
+							value="AMBA_AXIBus_LT1">
+
+						</port>
+
+						<port
+							name="IBusPort"
+							value="AMBA_AXIBus_LT1">
+
+						</port>
+
+						<component
+							type="Core"
+							SubType="armCortexA9_DisTLM.core0"
+							InstanceName="armCortexA91.core0">
+
+							<component
+								type="Module"
+								SubType="STANDARD"
+								ClassName="BitmapRW"
+								InstanceName="BitmapRW1">
+
+							</component>
+
+						</component>
+
+						<component
+							type="Core"
+							SubType="armCortexA9_DisTLM.core1"
+							InstanceName="armCortexA91.core1">
+
+						</component>
+
+					</component>
+
+					<component
+						type="Adapter"
+						SubType="ISSAdapter"
+						InstanceName="ISSAdapter1">
+
+					</component>
+
+					<component
+						type="PIC"
+						SubType="XilinxPIC"
+						InstanceName="XilinxPIC1">
+
+					</component>
+
+				</component>
+
+
+			</component>
+
+			<component
+				type="Bus"
+				SubType="AMBA_AXIBus_LT"
+				InstanceName="AMBA_AXIBus_LT1">
+
+				
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="Sobel"
+					InstanceName="Sobel1">
+
+				</component>
+
+				<component
+					type="ISS"
+					SubType="armCortexA9"
+					InstanceName="armCortexA91">
+
+					<port
+						name="DBusPort"
+						value="AMBA_AXIBus_LT1">
+
+					</port>
+
+					<port
+						name="IBusPort"
+						value="AMBA_AXIBus_LT1">
+
+					</port>
+
+					<component
+						type="Core"
+						SubType="armCortexA9_DisTLM.core0"
+						InstanceName="armCortexA91.core0">
+
+						<component
+							type="Module"
+							SubType="STANDARD"
+							ClassName="BitmapRW"
+							InstanceName="BitmapRW1">
+
+						</component>
+
+					</component>
+
+					<component
+						type="Core"
+						SubType="armCortexA9_DisTLM.core1"
+						InstanceName="armCortexA91.core1">
+
+					</component>
+
+				</component>
+
+				<component
+					type="Adapter"
+					SubType="ISSAdapter"
+					InstanceName="ISSAdapter1">
+
+				</component>
+
+				<component
+					type="PIC"
+					SubType="XilinxPIC"
+					InstanceName="XilinxPIC1">
+
+				</component>
+
+
+			</component>
+
+			<component
+				type="Bus"
+				SubType="AMBA_AXIBus_LT"
+				InstanceName="armCortexA91_HP0_AMBA_AXIBus_LT1">
+
+				
+				<component
+					type="Adapter"
+					SubType="InterfaceRange"
+					InstanceName="armCortexA91_DDR_InterfaceRange1">
+
+					<port
+						name="SlaveIFPort"
+						value="armCortexA91"
+						target="HP0">
+
+					</port>
+
+				</component>
+
+
+			</component>
+
+			<component
+				type="ISS"
+				SubType="armCortexA9"
+				InstanceName="armCortexA91">
+
+				
+				<component
+					type="Core"
+					SubType="armCortexA9_DisTLM.core0"
+					InstanceName="armCortexA91.core0">
+
+					<component
+						type="Module"
+						SubType="STANDARD"
+						ClassName="BitmapRW"
+						InstanceName="BitmapRW1">
+
+					</component>
+
+				</component>
+
+				<component
+					type="Core"
+					SubType="armCortexA9_DisTLM.core1"
+					InstanceName="armCortexA91.core1">
+
+				</component>
+
+
+			</component>
+
+			<component
+				type="Core"
+				SubType="armCortexA9_DisTLM.core0"
+				InstanceName="armCortexA91.core0">
+
+				
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="BitmapRW"
+					InstanceName="BitmapRW1">
+
+				</component>
+
+
+			</component>
+
+			<component
+				type="Core"
+				SubType="armCortexA9_DisTLM.core1"
+				InstanceName="armCortexA91.core1">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="BitmapRW"
+				InstanceName="BitmapRW1">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="Sobel"
+				InstanceName="Sobel1">
+
+
+			</component>
+
+			<component
+				type="PIC"
+				SubType="XilinxPIC"
+				InstanceName="XilinxPIC1">
+
+
+			</component>
+
+			<component
+				type="ResetManager"
+				SubType="ResetManager"
+				InstanceName="reset_manager">
+
+
+			</component>
+
+
+		</ComponentLevel>
+
+		<InterruptLevel>
+			<component
+				type="PIC"
+				SubType="XilinxPIC"
+				InstanceName="XilinxPIC1">
+
+				<OutPort
+					name="IRQOutPort"
+					position="0">
+
+					<ConnectedTo>
+
+						<Component
+							type="ISS"
+							SubType="armCortexA9"
+							InstanceName="armCortexA91">
+
+							<InPort
+								name="SPI0InPort"
+								position="0">
+
+							</InPort>
+
+
+						</Component>
+					</ConnectedTo>
+				</OutPort>
+
+			</component>
+
+		</InterruptLevel>
+	</Binding>
+
+</project>

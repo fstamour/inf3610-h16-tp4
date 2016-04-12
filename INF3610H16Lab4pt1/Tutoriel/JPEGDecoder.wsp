@@ -1,0 +1,13 @@
+Project		JPEGDecoder
+File	EXTR.h
+File	EXTR.cpp
+File	FACEDETECT.h
+File	FACEDETECT.cpp
+File	HUFF.h
+File	HUFF.cpp
+File	IDCT.h
+File	IDCT.cpp
+File	IQTZ.h
+File	IQTZ.cpp
+File	Y2R.h
+File	Y2R.cpp

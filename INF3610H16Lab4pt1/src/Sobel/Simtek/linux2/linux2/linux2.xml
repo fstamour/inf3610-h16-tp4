@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+********************************************************************************
+
+	Author : SpaceStudio generation engine
+
+	Warning: This file content will be overwritten by the configuration manager.
+
+********************************************************************************
+ -->
+<project
+	name="Sobel"
+	level="Simtek"
+	ConfigName="linux2"
+	SpaceStudioVersion="280">
+
+</project>

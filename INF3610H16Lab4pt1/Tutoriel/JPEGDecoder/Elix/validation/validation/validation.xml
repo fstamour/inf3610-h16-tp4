@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+********************************************************************************
+
+	Author : SpaceStudio generation engine
+
+	Warning: This file content will be overwritten by the configuration manager.
+
+********************************************************************************
+ -->
+<project
+	name="JPEGDecoder"
+	level="Elix"
+	ConfigName="validation"
+	SpaceStudioVersion="270">
+
+	<InstanceList>
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="EXTR"
+			InstanceName="EXTR1"
+			HeaderFileName="Undefined"
+			id_key="EXTR_ID"
+			id="0"
+			prio_key="EXTR_PRIO"
+			prio="1"
+			verbose="false"
+			SystemClock="SysClock"
+			InterfaceClock="None">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="FACEDETECT"
+			InstanceName="FACEDETECT1"
+			HeaderFileName="Undefined"
+			id_key="FACEDETECT_ID"
+			id="1"
+			prio_key="FACEDETECT_PRIO"
+			prio="2"
+			verbose="false"
+			SystemClock="SysClock"
+			InterfaceClock="None">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="HUFF"
+			InstanceName="HUFF1"
+			HeaderFileName="Undefined"
+			id_key="HUFF_ID"
+			id="2"
+			prio_key="HUFF_PRIO"
+			prio="3"
+			verbose="false"
+			SystemClock="SysClock"
+			InterfaceClock="None">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="IDCT"
+			InstanceName="IDCT1"
+			HeaderFileName="Undefined"
+			id_key="IDCT_ID"
+			id="3"
+			prio_key="IDCT_PRIO"
+			prio="4"
+			verbose="false"
+			SystemClock="SysClock"
+			InterfaceClock="None">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="IQTZ"
+			InstanceName="IQTZ1"
+			HeaderFileName="Undefined"
+			id_key="IQTZ_ID"
+			id="4"
+			prio_key="IQTZ_PRIO"
+			prio="5"
+			verbose="false"
+			SystemClock="SysClock"
+			InterfaceClock="None">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
+			ClassName="Y2R"
+			InstanceName="Y2R1"
+			HeaderFileName="Undefined"
+			id_key="Y2R_ID"
+			id="5"
+			prio_key="Y2R_PRIO"
+			prio="6"
+			verbose="false"
+			SystemClock="SysClock"
+			InterfaceClock="None">
+		</component>
+
+		<component
+			type="Bus"
+			SubType="TFChannel"
+			InstanceName="TFChannel1"
+			id_key="TFCHANNEL1_ID"
+			id="6"
+			verbose="false"
+			ptrAddress="0"
+			ulBaseAddress="0x0"
+			ulHighAddress="0xFFFFFFFF"
+			isFixRange="true"
+			ulMaxComponentSize="0x100000000"
+			ulMinComponentSize="0x100"
+			uiChannelWidth="ChannelWidth4"
+			eArbiterMode="TF_FIFO"
+			eTFChannelLatencyScheme="TF_LATENCY_CORECONNECT_OPB"
+			ulArbitrationLatency="0"
+			ulTransferLatency="0"
+			ulAcknowledgmentLatency="0"
+			eLatencyFeatureBurst="TF_LATENCY_BURST_ON">
+		</component>
+
+		<component
+			type="Memory"
+			SubType="RegisterFile"
+			InstanceName="RegisterFile1"
+			id_key="REGISTERFILE1_ID"
+			id="7"
+			ulSize_key="REGISTERFILE1_SIZE"
+			zUploadFileName="0"
+			verbose="false"
+			SoftwareCodeBigEndian="false"
+			ulSize="0x20000"
+			ulBaseAddress="0x00000000"
+			ulHighAddress="0x00000000"
+			isFixRange="false"
+			ulReadLatency="1"
+			ulWriteLatency="1"
+			ulMinAddressRange="0x1000000">
+		</component>
+
+		<component
+			type="Memory"
+			SubType="XilinxBRAM"
+			InstanceName="jpegRAM"
+			id_key="JPEGRAM_ID"
+			id="8"
+			ulSize_key="XILINXBRAM1_SIZE"
+			zUploadFileName="../../../../../../import/txt/jpegRAMInit.txt"
+			verbose="false"
+			SoftwareCodeBigEndian="false"
+			ulMinAddressRange="0x1000"
+			ulSize="0x100000"
+			ulBaseAddress="0x00100000"
+			ulHighAddress="0x001FFFFF"
+			isFixRange="false"
+			ulReadLatency="XILINX_BRAM_READ_LATENCY"
+			ulWriteLatency="XILINX_BRAM_WRITE_LATENCY">
+		</component>
+
+		<component
+			type="Memory"
+			SubType="XilinxBRAM"
+			InstanceName="bitmapRAM"
+			id_key="BITMAPRAM_ID"
+			id="9"
+			ulSize_key="XILINXBRAM1_SIZE1"
+			zUploadFileName="0"
+			verbose="false"
+			SoftwareCodeBigEndian="false"
+			ulMinAddressRange="0x1000"
+			ulSize="0x100000"
+			ulBaseAddress="0x00000000"
+			ulHighAddress="0x000FFFFF"
+			isFixRange="false"
+			ulReadLatency="XILINX_BRAM_READ_LATENCY"
+			ulWriteLatency="XILINX_BRAM_WRITE_LATENCY">
+		</component>
+
+		<component
+			type="Memory"
+			SubType="XilinxBRAM"
+			InstanceName="sharedRAM"
+			id_key="SHAREDRAM_ID"
+			id="10"
+			ulSize_key="XILINXBRAM1_SIZE2"
+			zUploadFileName="0"
+			verbose="false"
+			SoftwareCodeBigEndian="false"
+			ulMinAddressRange="0x1000"
+			ulSize="0x100000"
+			ulBaseAddress="0x00200000"
+			ulHighAddress="0x002FFFFF"
+			isFixRange="false"
+			ulReadLatency="XILINX_BRAM_READ_LATENCY"
+			ulWriteLatency="XILINX_BRAM_WRITE_LATENCY">
+		</component>
+
+		<signal
+			type="Signal"
+			SubType="sc_clock"
+			InstanceName="SysClock"
+			DutyCycle="0.5"
+			Period="10"
+			PeriodTimeUnit="SC_NS">
+		</signal>
+
+		<component
+			type="UserDevice"
+			SubType="UserDeviceSlave"
+			ClassName="VGA_CONTROLLER"
+			InstanceName="VGA_CONTROLLER1"
+			id_key="VGA_CONTROLLER_ID"
+			id="11"
+			verbose="false"
+			deviceType="SLAVE"
+			ulMinAddressRange="0x1000000"
+			ulBaseAddress="0x01000000"
+			ulHighAddress="0x01FFFFFF"
+			isFixRange="false">
+		</component>
+
+
+	</InstanceList>
+	
+	<Binding>
+
+		<ComponentLevel>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="EXTR"
+				InstanceName="EXTR1">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="FACEDETECT"
+				InstanceName="FACEDETECT1">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="HUFF"
+				InstanceName="HUFF1">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="IDCT"
+				InstanceName="IDCT1">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="IQTZ"
+				InstanceName="IQTZ1">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
+				ClassName="Y2R"
+				InstanceName="Y2R1">
+
+
+			</component>
+
+			<component
+				type="Bus"
+				SubType="TFChannel"
+				InstanceName="TFChannel1">
+
+				
+				<component
+					type="Memory"
+					SubType="RegisterFile"
+					InstanceName="RegisterFile1">
+
+				</component>
+
+				<component
+					type="Memory"
+					SubType="XilinxBRAM"
+					InstanceName="bitmapRAM">
+
+				</component>
+
+				<component
+					type="Memory"
+					SubType="XilinxBRAM"
+					InstanceName="jpegRAM">
+
+				</component>
+
+				<component
+					type="Memory"
+					SubType="XilinxBRAM"
+					InstanceName="sharedRAM">
+
+				</component>
+
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="FACEDETECT"
+					InstanceName="FACEDETECT1">
+
+				</component>
+
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="EXTR"
+					InstanceName="EXTR1">
+
+				</component>
+
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="HUFF"
+					InstanceName="HUFF1">
+
+				</component>
+
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="IDCT"
+					InstanceName="IDCT1">
+
+				</component>
+
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="IQTZ"
+					InstanceName="IQTZ1">
+
+				</component>
+
+				<component
+					type="Module"
+					SubType="STANDARD"
+					ClassName="Y2R"
+					InstanceName="Y2R1">
+
+				</component>
+
+				<component
+					type="UserDevice"
+					SubType="UserDeviceSlave"
+					ClassName="VGA_CONTROLLER"
+					InstanceName="VGA_CONTROLLER1">
+
+				</component>
+
+
+			</component>
+
+			<component
+				type="Memory"
+				SubType="RegisterFile"
+				InstanceName="RegisterFile1">
+
+
+			</component>
+
+			<component
+				type="Memory"
+				SubType="XilinxBRAM"
+				InstanceName="jpegRAM">
+
+
+			</component>
+
+			<component
+				type="Memory"
+				SubType="XilinxBRAM"
+				InstanceName="bitmapRAM">
+
+
+			</component>
+
+			<component
+				type="Memory"
+				SubType="XilinxBRAM"
+				InstanceName="sharedRAM">
+
+
+			</component>
+
+			<component
+				type="UserDevice"
+				SubType="UserDeviceSlave"
+				ClassName="VGA_CONTROLLER"
+				InstanceName="VGA_CONTROLLER1">
+
+
+			</component>
+
+
+		</ComponentLevel>
+
+	</Binding>
+
+</project>

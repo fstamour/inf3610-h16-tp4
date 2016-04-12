@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project name="Sobel" version="280" xmlns="http://www.spacecodesign.com/schemas/2.7/ProjectItems.xsd">
+    <files>
+        <file name="ap_bmp.cpp" type="SOURCE"/>
+        <file name="ap_bmp.h" type="HEADER"/>
+    </files>
+    <libraries/>
+    <usermodules>
+        <usermodule name="BitmapRW">
+            <filerefs>
+                <fileref name="ap_bmp.cpp"/>
+                <fileref name="ap_bmp.h"/>
+            </filerefs>
+            <libraryrefs/>
+        </usermodule>
+        <usermodule name="Sobel">
+            <filerefs/>
+            <libraryrefs/>
+        </usermodule>
+        <usermodule name="RGBtoBW">
+            <filerefs/>
+            <libraryrefs/>
+        </usermodule>
+    </usermodules>
+    <userdevices/>
+</project>

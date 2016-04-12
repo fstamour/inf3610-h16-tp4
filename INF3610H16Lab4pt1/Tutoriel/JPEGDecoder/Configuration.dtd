@@ -1,0 +1,110 @@
+<!ELEMENT project (InstanceList?, binding?, file*, importation?)>
+
+<!ATTLIST project
+	name CDATA #REQUIRED
+	level CDATA #REQUIRED
+	ConfigName CDATA #IMPLIED
+	SpaceStudioVersion CDATA #IMPLIED>
+
+<!ELEMENT InstanceList (component*, signal*)>
+
+<!ELEMENT binding (ComponentLevel?, InterruptLevel?, DirectLinkLevel?)>
+
+<!ELEMENT ComponentLevel (component+)>
+
+<!ELEMENT InterruptLevel (component*, signal*)>
+
+<!ELEMENT DirectLinkLevel (DirectLink+)>
+
+<!ELEMENT DirectLink (component, component)>
+
+<!ELEMENT component (component*, OutPort*, InPort*, Port*, EmptySignal*, RequisiteFor*)>
+
+<!ATTLIST component
+	BusArbitrationMode NMTOKEN #IMPLIED
+	ClassName NMTOKEN #IMPLIED
+	clock NMTOKEN #IMPLIED
+	DebuggerPort NMTOKEN #IMPLIED
+	DutyCycle NMTOKEN #IMPLIED
+	executable NMTOKEN #IMPLIED
+	HeaderFileName NMTOKEN #IMPLIED
+	id_key NMTOKEN #IMPLIED
+	id NMTOKEN #IMPLIED
+	InstanceName NMTOKEN #REQUIRED
+	KindOf NMTOKEN #IMPLIED
+	ModuleType NMTOKEN #IMPLIED
+	name NMTOKEN #IMPLIED
+	period NMTOKEN #IMPLIED
+	PeriodTimeUnit NMTOKEN #IMPLIED
+	PortName NMTOKEN #IMPLIED
+	prio_key NMTOKEN #IMPLIED
+	prio NMTOKEN #IMPLIED
+	RelatedTo NMTOKEN #IMPLIED
+	size_key NMTOKEN #IMPLIED
+	size NMTOKEN #IMPLIED
+	subtype NMTOKEN #REQUIRED
+	type NMTOKEN #REQUIRED
+	verbose (true | false) #IMPLIED>
+
+<!ATTLIST DirectLink
+  name NMTOKEN #REQUIRED
+  Direction (M1_TO_M2 | M2_TO_M1 | BOTH) #REQUIRED
+  FIFODepth NMTOKEN #REQUIRED>
+
+<!ELEMENT port (#PCDATA)>
+
+<!ATTLIST port
+	name NMTOKEN #REQUIRED
+	child NMTOKEN #IMPLIED>
+
+<!ELEMENT EmptySignal (#PCDATA)>
+<!ATTLIST EmptySignal
+	PortName NMTOKEN #REQUIRED
+	position NMTOKEN #IMPLIED>
+
+<!ELEMENT RequisiteFor (#PCDATA)>
+<!ATTLIST RequisiteFor
+	type NMTOKEN #REQUIRED
+	SubType NMTOKEN #REQUIRED
+	InstanceName NMTOKEN #REQUIRED>
+
+<!ELEMENT signal (in+, out+, ConnectedTo+)>
+
+<!ATTLIST signal
+	DutyCycle NMTOKEN #IMPLIED
+	InstanceName NMTOKEN #REQUIRED
+	name NMTOKEN #REQUIRED
+	period NMTOKEN #IMPLIED
+	PeriodTimeUnit NMTOKEN #IMPLIED
+	type NMTOKEN #REQUIRED>
+
+<!ELEMENT OutPort (ConnectedTo+)>
+
+<!ATTLIST OutPort
+	name NMTOKEN #REQUIRED
+	position NMTOKEN #IMPLIED>
+
+<!ELEMENT ConnectedTo (Component+)>
+
+<!ELEMENT InPort (#PCDATA)>
+
+<!ATTLIST InPort
+	name NMTOKEN #REQUIRED
+	position NMTOKEN #IMPLIED>
+
+<!ELEMENT file (file_token, file_name)>
+
+<!ELEMENT file_token (#PCDATA)>
+
+<!ELEMENT file_name (#PCDATA)>
+
+<!ELEMENT importation (item*)>
+
+<!ELEMENT item (importedFile*, importedLibrary*)>
+
+<!ATTLIST item
+	name CDATA #REQUIRED>
+	
+<!ELEMENT importedFile (#PCDATA)>
+
+<!ELEMENT importedLibrary (#PCDATA)>

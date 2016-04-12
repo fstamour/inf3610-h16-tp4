@@ -1,0 +1,19 @@
+# ##########################################################################################################################################
+# BASICRAM File Initializer (c) Space Codesign 2004-2014
+# ##########################################################################################################################################
+# Use this file as an entry point to initialize Space Codesign memory components with one or more files. Files could be of any size.
+# No checks are made with regards of file overlap, be careful with your initializations. 
+# Please list your files below and respect the following guidelines
+# ---|>    Please use full path (or relative with respect to the execution directory), single backslash up, string up to 512 characters
+# ---|>    '#' to comment a line
+# ---|>    '!' to declare end of file 
+# ---|>    Addresses stand on 32 bits, are in hexadecimal without 0x
+# ---|>    Addresses are based on the component's address range on its platform (and not relative to 0)
+# ---|>    Insert a single tab between filepath/name and address
+# ##########################################################################################################################################
+../../../../../../import/image/jpeg1.jpg	20
+!
+# All lines below from here won't be read
+
+(c) Space Codesign 2011,2014
+

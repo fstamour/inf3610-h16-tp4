@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- definition of types -->
+  <xs:simpleType name="FileType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="HEADER" />
+      <xs:enumeration value="SOURCE" />
+      <xs:enumeration value="OBJECT" />
+      <xs:enumeration value="IMAGE" />
+      <xs:enumeration value="TEXT" />
+      <xs:enumeration value="BINARY" />
+      <xs:enumeration value="AUDIO" />
+	  <xs:enumeration value="VIDEO" />
+      <xs:enumeration value="LIBRARY" />
+      <xs:enumeration value="OTHER" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TestbenchType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="STANDARD_TB" />
+	  <xs:enumeration value="UNKNOWN" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DeviceType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="SLAVE" />
+      <xs:enumeration value="MASTER" />
+      <xs:enumeration value="MASTER_SLAVE" />
+	  <xs:enumeration value="UNKNOWN" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ModuleType">
+    <xs:restriction base="xs:token">
+	  <xs:enumeration value="STANDARD" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Name">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <!-- definition of attributes -->
+  <xs:attribute name="name" type="Name" />
+  <xs:attribute name="testbenchType" type="TestbenchType" default="STANDARD_TB"/>
+  <xs:attribute name="deviceType" type="DeviceType" />
+  <xs:attribute name="moduleType" type="ModuleType" />
+  <xs:attribute name="fileType" type="FileType" default="OTHER" />
+  
+  <!-- definition of complex elements -->
+  <xs:element name="File">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute ref="name" use="required" />
+          <xs:attribute ref="fileType" use="required" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImportFile">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute ref="name" use="required" />
+          <xs:attribute ref="fileType" use="required" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImportLibrary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="File" minOccurs="1" maxOccurs="2" />
+      </xs:sequence>
+      <xs:attribute ref="name" use="required" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserModule">
+    <xs:complexType>
+      <xs:attribute ref="name" use="required" />
+	  <xs:attribute ref="moduleType" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserDevice">
+    <xs:complexType>
+      <xs:attribute ref="name" use="required" />
+	  <xs:attribute ref="deviceType" use="required" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserTestbench">
+    <xs:complexType>
+      <xs:attribute ref="name" use="required" />
+      <xs:attribute ref="testbenchType" use="required" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProjectItems">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ImportFile" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="ImportLibrary" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="UserModule" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="UserDevice" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="UserTestbench" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute ref="name" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

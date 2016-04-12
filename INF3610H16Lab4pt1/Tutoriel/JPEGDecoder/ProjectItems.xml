@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project name="JPEGDecoder" version="279" xmlns="http://www.spacecodesign.com/schemas/2.7/ProjectItems.xsd">
+    <files>
+        <file name="jpeg1.jpg" type="IMAGE"/>
+        <file name="out.bmp" type="IMAGE"/>
+        <file name="VGADefinitions.h" type="HEADER"/>
+        <file name="jpegRAMInit.txt" type="TEXT"/>
+    </files>
+    <libraries>
+        <library name="BasicVGAController">
+            <includedir>
+                <directory name="import/lib"/>
+            </includedir>
+            <objectfile toolchain="MinGW GNU">
+                <file name="import/lib/libBasicVGAController.mingw.a" type="LIBRARY"/>
+            </objectfile>
+            <objectfile toolchain="Visual Studio">
+                <file name="import/lib/BasicVGAController.msvc.lib" type="LIBRARY"/>
+            </objectfile>
+        </library>
+        <library name="OpenGL">
+            <includedir>
+                <directory name="import/lib"/>
+            </includedir>
+            <objectfile toolchain="MinGW GNU">
+                <file name="import/lib/libopengl32.a" type="LIBRARY"/>
+            </objectfile>
+        </library>
+        <library name="freeglut">
+            <includedir>
+                <directory name="import/lib"/>
+            </includedir>
+            <objectfile toolchain="MinGW GNU">
+                <file name="import/lib/libfreeglut.a" type="LIBRARY"/>
+            </objectfile>
+            <objectfile toolchain="Visual Studio">
+                <file name="import/lib/freeglut.lib" type="LIBRARY"/>
+            </objectfile>
+        </library>
+    </libraries>
+    <usermodules>
+        <usermodule name="EXTR">
+            <filerefs/>
+            <libraryrefs/>
+        </usermodule>
+        <usermodule name="FACEDETECT">
+            <filerefs/>
+            <libraryrefs/>
+        </usermodule>
+        <usermodule name="HUFF">
+            <filerefs/>
+            <libraryrefs/>
+        </usermodule>
+        <usermodule name="IDCT">
+            <filerefs/>
+            <libraryrefs/>
+        </usermodule>
+        <usermodule name="IQTZ">
+            <filerefs/>
+            <libraryrefs/>
+        </usermodule>
+        <usermodule name="Y2R">
+            <filerefs/>
+            <libraryrefs/>
+        </usermodule>
+    </usermodules>
+    <userdevices>
+        <userdevice name="VGA_CONTROLLER" type="SLAVE">
+            <filerefs>
+                <fileref name="VGADefinitions.h"/>
+            </filerefs>
+            <libraryrefs>
+                <libraryref name="BasicVGAController"/>
+                <libraryref name="OpenGL"/>
+                <libraryref name="freeglut"/>
+            </libraryrefs>
+        </userdevice>
+    </userdevices>
+</project>
