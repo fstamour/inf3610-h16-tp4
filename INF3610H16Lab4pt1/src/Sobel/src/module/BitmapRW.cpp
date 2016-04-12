@@ -41,20 +41,11 @@ void BitmapRW::thread(void) {
 	/* Communications avec les autres modules */
 
 	// On envoie les array R, G et B au module RGBtoBW.
-	message_t message = {
-			MSG_RGB_TO_BW,
-			(cmd_param_t)R, (cmd_param_t)G, (cmd_param_t)B
-	};
-	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, &message);
+	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, R, IMG_SIZE);
+	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, G, IMG_SIZE);
+	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, B, IMG_SIZE);
 
-	ModuleRead(SOBEL_ID, SPACE_BLOCKING, &message);
-	if(message.command_type != MSG_BMP_WRITE) {
-		SpacePrint("[BitmapRW] Invalid message type: %d\n", message.command_type);
-		sc_stop();
-	}
-	// SpacePrint("[BitmapRW] About to copy the Y (received from Sobel).\n");
-	uint8_t *Sob = (uint8_t *)message.param0;
-	memcpy(Y, Sob, IMG_SIZE);
+	ModuleRead(SOBEL_ID, SPACE_BLOCKING, Y, IMG_SIZE);
 
 	//Write the image back to disk
 	int write_tmp = BMP_Write(outName, IMG_HEIGHT, IMG_WIDTH, Y, Y, Y);

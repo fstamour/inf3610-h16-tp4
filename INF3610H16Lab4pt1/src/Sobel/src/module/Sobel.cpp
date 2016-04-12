@@ -71,21 +71,10 @@ void Sobel::thread(void) {
 	Y = Ystatic;
 	Sob = SobStatic;
 
-	message_t message;
-
 	while(1) {
-		ModuleRead(RGBTOBW_ID, SPACE_BLOCKING, &message);
-
 		SpacePrint("[Sobel] executing...\n");
 
-		if(message.command_type != MSG_SOBEL) {
-			SpacePrint("[Sobel] Invalid message type: %d\n", message.command_type);
-			sc_stop();
-		}
-
-		// SpacePrint("[Sobel] memcpy.\n");
-		uint8_t *Y = (uint8_t *)message.param0;
-		memcpy(Ystatic, Y, IMG_SIZE);
+		ModuleRead(RGBTOBW_ID, SPACE_BLOCKING, Y, IMG_SIZE);
 
 		SpacePrint("[Sobel] Applying the filter...\n");
 		for(int x = 1; x < IMG_WIDTH - 1; ++x) {
@@ -96,14 +85,7 @@ void Sobel::thread(void) {
 			}
 		}
 
-		// Creating a dynamic array in order to be able to send it to another module.
-		uint8_t *SobDyn = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
-		memcpy(SobDyn, Sob, IMG_SIZE);
-
 		SpacePrint("[Sobel] Sending bitmap...\n");
-		memset(&message, 0, sizeof(message));
-		message.command_type = MSG_BMP_WRITE;
-		message.param0 = (cmd_param_t)SobDyn;
-		ModuleWrite(BITMAPRW_ID, SPACE_BLOCKING, &message);
+		ModuleWrite(BITMAPRW_ID, SPACE_BLOCKING, Sob, IMG_SIZE);
 	}
 }
