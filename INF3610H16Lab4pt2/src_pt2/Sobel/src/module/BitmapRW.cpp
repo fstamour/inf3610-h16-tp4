@@ -59,6 +59,7 @@ void BitmapRW::thread(void) {
 	int read_tmp = BMP_Read(inputImage, IMG_HEIGHT, IMG_WIDTH, R, G, B);
 	if(read_tmp != 0) {
 		SpacePrintIfNotMonitoring("Loading image failed\n");
+		wait(1000);
 		sc_stop();
 	}
 

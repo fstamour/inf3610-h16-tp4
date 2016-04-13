@@ -36,7 +36,7 @@ void RGBtoBW::thread(void) {
 	uint8_t *B = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
 	uint8_t *Y = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
 
-	//while(1) {
+	while(1) {
 		MyPrint("[RGBtoBW] executing...\n");
 		
 
@@ -58,7 +58,7 @@ void RGBtoBW::thread(void) {
 		MyPrint( "[RGBtoBW] Sending bitmap...\n" );
 
 		ModuleWrite(SOBEL_ID, SPACE_BLOCKING, Y, IMG_SIZE);
-	//}
+	}
 
 	free(R);
 	free(G);

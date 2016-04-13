@@ -68,7 +68,7 @@ void Sobel::thread(void) {
 	uint8_t Y[IMG_SIZE];
 	uint8_t Sob[IMG_SIZE];
 
-	//while(1) {
+	while(1) {
 		//MyPrint("[Sobel] executing...\n");
 
 		ModuleRead(RGBTOBW_ID, SPACE_BLOCKING, Y, IMG_SIZE);
@@ -86,5 +86,5 @@ void Sobel::thread(void) {
 		ModuleWrite(BITMAPRW_ID, SPACE_BLOCKING, Sob, IMG_SIZE);
 
 		computeFor(1);
-	//}
+	}
 }
