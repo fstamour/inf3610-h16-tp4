@@ -23,7 +23,7 @@ class Sobel: public SpaceBaseModule {
 	   	
 	    void thread(void);
 	private:
-		uint8_t sobel_operator(const int index, const uint8_t * Y);
+		//uint8_t sobel_operator(const int index, const uint8_t * Y);
 };
 
 #endif

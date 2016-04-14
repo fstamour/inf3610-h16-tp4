@@ -1,0 +1,37 @@
+###################################################################
+##
+## Filename       : Sobel_top_v2_1_0.mpd
+##
+###################################################################
+##  Copyright 2011 - Space Codesign Systems, Inc.
+##  All rights reserved.
+###################################################################
+
+BEGIN Sobel_top
+
+## Peripheral Options
+OPTION IPTYPE = PERIPHERAL
+OPTION IMP_NETLIST = TRUE
+OPTION HDL = VHDL
+OPTION ARCH_SUPPORT_MAP = (OTHERS=DEVELOPMENT)
+OPTION IP_GROUP = USER
+
+## Generics for VHDL or Parameters for Verilog
+PARAMETER AWIDTH = 32, DT = INTEGER
+PARAMETER DWIDTH = 32, DT = INTEGER
+
+## Ports
+
+PORT SDL0_M_Data = "", DIR = O, VEC = [0:(DWIDTH-1)]
+PORT SDL0_M_Write = "", DIR = O
+PORT SDL0_M_Full = "", DIR = I
+        
+PORT SDL0_S_Data = "", DIR = I, VEC = [0:(DWIDTH-1)]
+PORT SDL0_S_Read = "", DIR = O
+PORT SDL0_S_Empty = "", DIR = I
+        
+
+PORT Clk = "", DIR = I
+PORT Reset = "", DIR = I
+
+END

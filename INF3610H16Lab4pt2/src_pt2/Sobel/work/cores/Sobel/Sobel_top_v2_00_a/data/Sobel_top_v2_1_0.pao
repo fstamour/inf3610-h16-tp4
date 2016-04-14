@@ -1,0 +1,5 @@
+lib Sobel_top_v2_00_a Sobel_top.vhd vhdl
+lib Sobel_top_v2_00_a Sobel.vhd vhdl
+lib Sobel_top_v2_00_a Sobel_thread.vhd vhdl
+lib Sobel_top_v2_00_a Sobel_thread_Sob.vhd vhdl
+lib Sobel_top_v2_00_a Sobel_thread_Y.vhd vhdl

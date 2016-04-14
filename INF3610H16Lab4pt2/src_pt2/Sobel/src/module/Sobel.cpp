@@ -21,7 +21,7 @@ Sobel::Sobel(sc_core::sc_module_name name, double period, sc_core::sc_time_unit 
 }
 
 
-uint8_t Sobel::sobel_operator(const int index, const uint8_t * Y)
+inline uint8_t sobel_operator(const uint8_t Y[3][3])
 {
 	int x_weight = 0;
 	int y_weight = 0;
@@ -29,7 +29,7 @@ uint8_t Sobel::sobel_operator(const int index, const uint8_t * Y)
 	unsigned edge_weight;
 	uint8_t edge_val;
 
-	/* À COMPLÉTER: noyau de l'algorithme */
+	/* Noyau de l'algorithme */
 
 	// index = y * width + x; Donc:
 	// y = index % IMG_WIDTH;
@@ -42,13 +42,6 @@ uint8_t Sobel::sobel_operator(const int index, const uint8_t * Y)
 	// +1 ==> x +1
 
 	// Compute Gx, Gy
-	/*
-	x_weight = (Y[index - IMG_WIDTH - 1] * -1) + (Y[index - IMG_WIDTH] * -2) + (Y[index - IMG_WIDTH + 1] * -1)
-			 + (Y[index + IMG_WIDTH - 1] *  1) + (Y[index + IMG_WIDTH] *  2) + (Y[index + IMG_WIDTH + 1] *  1);
-
-	y_weight = (Y[index - IMG_WIDTH - 1] * -1) + (Y[index -1] * -2) + (Y[index + IMG_WIDTH -1] * -1)
-			 + (Y[index - IMG_WIDTH + 1] *  1) + (Y[index +1] *  2) + (Y[index + IMG_WIDTH + 1] *  1);
-	*/
 
 	const int8_t coefs_x[3][3] =
 			{{-1,0,1},
@@ -58,13 +51,20 @@ uint8_t Sobel::sobel_operator(const int index, const uint8_t * Y)
 			{{-1,-2,-1},
              {0,0,0},
              {1,2,1}};
+
+
 	L3: for(int i = 0; i < 3; ++i) {
+	#pragma HLS unroll
 		L4: for(int j = 0; j < 3; ++j) {
+	#pragma HLS unroll
 			// DEBUG printf("x: %d y: %d   cx: %d cy: %d\n", i-1, j-1, coefs_x[i][j], coefs_y[i][j]);
-			x_weight += Y[index + (j-1)*IMG_WIDTH + (i-1)] * coefs_x[i][j];
-			y_weight += Y[index + (j-1)*IMG_WIDTH + (i-1)] * coefs_y[i][j];
+			/*x_weight += Y[index + (j-1)*IMG_WIDTH + (i-1)] * coefs_x[i][j];
+			y_weight += Y[index + (j-1)*IMG_WIDTH + (i-1)] * coefs_y[i][j];*/
+			x_weight += Y[i][j] * coefs_x[i][j];
+			y_weight += Y[i][j] * coefs_y[i][j];
 		}
 	}
+
 
 	// "Compute" |G|
 
@@ -95,14 +95,24 @@ void Sobel::thread(void) {
 		L1: for(int x = 1; x < IMG_WIDTH - 1; ++x) {
 			L2: for(int y = 1; y < IMG_HEIGHT -1; ++y) {
 				int index = y * IMG_WIDTH + x;
-				int edge_val = sobel_operator(index, Y);
+
+				uint8_t tmp[3][3];
+				L5: for(int i = 0; i < 3; ++i) {
+					#pragma HLS unroll
+					L6: for(int j = 0; j < 3; ++j) {
+					#pragma HLS unroll
+						tmp[i][j] = Y[index + (j-1)*IMG_WIDTH + (i-1)];
+					}
+				}
+
+				int edge_val = sobel_operator(index, tmp);
 				Sob[index] = edge_val;
 			}
 		}
+		//computeFor(441982);
+		computeFor(38421);
 
 		//MyPrint("[Sobel] Sending bitmap...\n");
 		ModuleWrite(BITMAPRW_ID, SPACE_BLOCKING, Sob, IMG_SIZE);
-
-		computeFor(1);
 	}
 }

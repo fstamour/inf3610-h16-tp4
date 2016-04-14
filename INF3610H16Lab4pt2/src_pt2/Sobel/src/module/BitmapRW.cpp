@@ -65,15 +65,16 @@ void BitmapRW::thread(void) {
 
 	/*À COMPLÉTER: Communications avec les autres modules */
 
-	// On envoie les array R, G et B au module RGBtoBW.
-	MyPrint("[BitmapRW] Sending...\n");
-	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, R, IMG_SIZE);
-	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, G, IMG_SIZE);
-	ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, B, IMG_SIZE);
+	for(int i = 0; i < 50; ++i) {
+		// On envoie les array R, G et B au module RGBtoBW.
+		MyPrint("[BitmapRW] Sending...\n");
+		ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, R, IMG_SIZE);
+		ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, G, IMG_SIZE);
+		ModuleWrite(RGBTOBW_ID, SPACE_BLOCKING, B, IMG_SIZE);
 
-	MyPrint("[BitmapRW] Receiving...\n");
-	ModuleRead(SOBEL_ID, SPACE_BLOCKING, Y, IMG_SIZE);
-
+		MyPrint("[BitmapRW] Receiving...\n");
+		ModuleRead(SOBEL_ID, SPACE_BLOCKING, Y, IMG_SIZE);
+	}
 
 #if !defined(SIMTEK) || !defined(SPACE_SIMULATION_MONITORING)
 	//Write the image back to disk

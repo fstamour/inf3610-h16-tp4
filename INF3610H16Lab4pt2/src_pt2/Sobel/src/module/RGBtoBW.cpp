@@ -27,7 +27,7 @@ static inline uint8_t rgb2y(uint8_t R, uint8_t G, uint8_t B) {
 RGBtoBW::RGBtoBW(sc_core::sc_module_name name, double period, sc_core::sc_time_unit unit, unsigned char id, unsigned char priority, bool verbose)
 :SpaceBaseModule(name, period, unit, id, priority, verbose) {
 	SC_THREAD(thread);
-	set_stack_size(0x16000+(IMG_SIZE*3));
+	set_stack_size(0x16000+(IMG_SIZE*4));
 }
 
 void RGBtoBW::thread(void) {
