@@ -31,10 +31,10 @@ RGBtoBW::RGBtoBW(sc_core::sc_module_name name, double period, sc_core::sc_time_u
 }
 
 void RGBtoBW::thread(void) {
-	uint8_t *R = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
-	uint8_t *G = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
-	uint8_t *B = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
-	uint8_t *Y = (uint8_t *)malloc(IMG_SIZE * sizeof(uint8_t));
+	uint8_t R[IMG_SIZE];
+	uint8_t G[IMG_SIZE];
+	uint8_t B[IMG_SIZE];
+	uint8_t Y[IMG_SIZE];
 
 	while(1) {
 		MyPrint("[RGBtoBW] executing...\n");
@@ -59,9 +59,4 @@ void RGBtoBW::thread(void) {
 
 		ModuleWrite(SOBEL_ID, SPACE_BLOCKING, Y, IMG_SIZE);
 	}
-
-	free(R);
-	free(G);
-	free(B);
-	free(Y);
 }
