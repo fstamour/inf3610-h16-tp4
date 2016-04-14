@@ -228,6 +228,20 @@
 		<component
 			type="Module"
 			SubType="STANDARD"
+			ClassName="RGBtoBW"
+			InstanceName="RGBtoBW1"
+			HeaderFileName="Undefined"
+			id_key="RGBTOBW_ID"
+			id="1"
+			prio_key="RGBTOBW_PRIO"
+			prio="4"
+			verbose="false"
+			SystemClock="SysClock">
+		</component>
+
+		<component
+			type="Module"
+			SubType="STANDARD"
 			ClassName="Sobel"
 			InstanceName="Sobel1"
 			HeaderFileName="Undefined"
@@ -279,20 +293,6 @@
 			Period="10"
 			PeriodTimeUnit="SC_NS">
 		</signal>
-
-		<component
-			type="Module"
-			SubType="STANDARD"
-			ClassName="RGBtoBW"
-			InstanceName="RGBtoBW1"
-			HeaderFileName="Undefined"
-			id_key="RGBTOBW_ID"
-			id="1"
-			prio_key="RGBTOBW_PRIO"
-			prio="4"
-			verbose="false"
-			SystemClock="SysClock">
-		</component>
 
 
 	</InstanceList>
@@ -704,6 +704,15 @@
 			<component
 				type="Module"
 				SubType="STANDARD"
+				ClassName="RGBtoBW"
+				InstanceName="RGBtoBW1">
+
+
+			</component>
+
+			<component
+				type="Module"
+				SubType="STANDARD"
 				ClassName="Sobel"
 				InstanceName="Sobel1">
 
@@ -722,15 +731,6 @@
 				type="ResetManager"
 				SubType="ResetManager"
 				InstanceName="reset_manager">
-
-
-			</component>
-
-			<component
-				type="Module"
-				SubType="STANDARD"
-				ClassName="RGBtoBW"
-				InstanceName="RGBtoBW1">
 
 
 			</component>
